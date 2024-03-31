@@ -4,10 +4,10 @@ public class Machine {
     private static int idCache = 0;
     private final int id;
     private String name;
-    private String capacity;
-    private String cooldownTime;
+    private Integer capacity;
+    private Integer cooldownTime;
 
-    public Machine(String name, String capacity, String cooldownTime) {
+    public Machine(String name, Integer capacity, Integer cooldownTime) {
         this.id = idCache;
         idCache += 1;
         this.name = name;
@@ -28,19 +28,19 @@ public class Machine {
         this.name = name;
     }
 
-    public String getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(String capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
-    public String getCooldownTime() {
+    public Integer getCooldownTime() {
         return cooldownTime;
     }
 
-    public void setCooldownTime(String cooldownTime) {
+    public void setCooldownTime(Integer cooldownTime) {
         this.cooldownTime = cooldownTime;
     }
 
