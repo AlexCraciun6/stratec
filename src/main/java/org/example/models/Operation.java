@@ -25,4 +25,12 @@ public class Operation {
     public void setProcessingTime(int processingTime) {
         this.processingTime = processingTime;
     }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "machine=" + machine +
+                ", processingTime=" + processingTime +
+                '}';
+    }
 }
