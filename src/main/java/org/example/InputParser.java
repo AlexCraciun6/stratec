@@ -1,8 +1,6 @@
 package org.example;
 
-import org.example.models.Machine;
-import org.example.models.Operation;
-import org.example.models.Part;
+import org.example.models.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -153,7 +151,7 @@ public class InputParser {
 
                     Machine machine = findMachineByName(machineName, machines);
                     if (machine != null){
-                        Operation operation = new Operation(machine, processingTime);
+                        Operation operation = new Operation(machine, processingTime, partIdx);
                         operations.add(operation);
                         parts.get(partIdx).addOperation(operation);
                     }
@@ -165,6 +163,9 @@ public class InputParser {
             e.printStackTrace();
         }
 
+        for(Part part: parts){
+            part.generateTotalProcessingTime();
+        }
         return operations;
     }
 
@@ -179,35 +180,41 @@ public class InputParser {
         return null;
     }
 
-    // Main method for testing
-    public static void main(String[] args) {
-        InputParser parser = new InputParser();
-        String filePath = "Input_One.txt";
-
-        List<Machine> machines = parser.parseMachines(filePath);
+    public void printToConsole(List<Machine> machines, List<Part> parts, List<Operation> operations){
         System.out.println("Machines:");
         for (Machine machine : machines) {
             System.out.println("Id: " + machine.getId() + ", Name: " + machine.getName() + ", Capacity: " + machine.getCapacity() + ", Cooldown Time: " + machine.getCooldownTime());
         }
-
-        List<Part> parts = parser.parseParts(filePath);
         System.out.println("Parts:");
         for (Part part : parts) {
-            System.out.println("Id: " + part.getId() + ", Name: " + part.getName() + ", Quantity: " + part.getQuantity());
+            System.out.println("Id: " + part.getId() + ", Name: " + part.getName() +
+                    ", Quantity: " + part.getQuantity() + ", TotalProcessingTime: " + part.getTotalProcessingTime());
         }
-
-        List<Operation> operations = parser.parsePartOperations(filePath);
-//        System.out.println("Part Operations:");
-//        for (Operation operation : operations) {
-//            System.out.println("Machine: " + operation.getMachine().getName() + ", Processing Time: " + operation.getProcessingTime());
-//        }
-
-
         System.out.println("Parts operations:");
         for (Part part : parts) {
             System.out.println("Id: " + part.getId() + " ,Operations: ");
             for(Operation operation: part.getOperations())
                 System.out.println(operation);
         }
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        InputParser parser = new InputParser();
+        String filePath = "Input_One.txt";
+
+        List<Machine> machines = parser.parseMachines(filePath);
+        List<Part> parts = parser.parseParts(filePath);
+        List<Operation> operations = parser.parsePartOperations(filePath);
+
+        parser.printToConsole(machines, parts, operations);
+
+        SimpleSchedule schedule = SimpleScheduler.generateSchedule(machines, parts, operations);
+        for(PartSchedule partSchedule: schedule.getPartSchedules()){
+            System.out.println(partSchedule.getPart());
+            for(OperationSchedule operationSchedule: partSchedule.getOperationScheduleList())
+                System.out.println(operationSchedule);
+        }
+
     }
 }

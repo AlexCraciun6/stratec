@@ -1,29 +1,37 @@
 package org.example.models;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PartSchedule {
-    private Part part;
-    private List<OperationSchedule> operationSchedules;
+    private List<OperationSchedule> operationScheduleList;
+    private final Part part;
 
     public PartSchedule(Part part) {
+        this.operationScheduleList = new ArrayList<>();
         this.part = part;
-        this.operationSchedules = new ArrayList<>();
+    }
+    public void addOperationScheduleList(OperationSchedule operationSchedule) {
+        operationScheduleList.add(operationSchedule);
     }
 
-    // Method to add an operation schedule to the PartSchedule
-    public void addOperationSchedule(OperationSchedule operationSchedule) {
-        operationSchedules.add(operationSchedule);
+    public List<OperationSchedule> getOperationScheduleList() {
+        return operationScheduleList;
     }
 
-    public LocalTime getTotalProcessingTime() {
-        LocalTime time = LocalTime.of(0, 0, 0);
-        return time;
+    public void setOperationScheduleList(List<OperationSchedule> operationScheduleList) {
+        this.operationScheduleList = operationScheduleList;
     }
 
-    // Getters for part and operationSchedules
+    public Part getPart() {
+        return part;
+    }
 
-    // Other methods as needed...
+    @Override
+    public String toString() {
+        return "PartSchedule{" +
+                "operationScheduleList=" + operationScheduleList +
+                ", part=" + part +
+                '}';
+    }
 }

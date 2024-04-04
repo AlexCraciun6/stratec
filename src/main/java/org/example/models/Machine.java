@@ -1,5 +1,7 @@
 package org.example.models;
 
+import java.util.Calendar;
+
 public class Machine {
     private static int idCache = 0;
     private final int id;
@@ -53,4 +55,5 @@ public class Machine {
                 ", cooldownTime='" + cooldownTime + '\'' +
                 '}';
     }
+
 }

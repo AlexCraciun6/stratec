@@ -1,5 +1,6 @@
 package org.example.models;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class OperationSchedule {
     private Operation operation;
@@ -14,5 +15,39 @@ public class OperationSchedule {
 
     // Getters for operation, startTime, and endTime
 
-    // Other methods as needed...
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return "OperationSchedule{" +
+                ", machineName=" + operation.getMachine().getName() +
+                ", startTime=" + startTime.format(formatter) +
+                ", endTime=" + endTime.format(formatter) +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package org.example.models;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class Part {
     private String name;
     private int quantity;
     private List<Operation> operations;
+    private int totalProcessingTime;
 
     public Part(String name, int quantity) {
         this.id = idCache;
@@ -16,6 +18,13 @@ public class Part {
         this.name = name;
         this.quantity = quantity;
         this.operations = new ArrayList<>();
+        this.totalProcessingTime = 0;
+    }
+
+    public void generateTotalProcessingTime(){
+        for(Operation operation: operations){
+            totalProcessingTime += operation.getProcessingTime();
+        }
     }
 
     public void addOperation(Operation operation) {
@@ -51,6 +60,14 @@ public class Part {
         this.operations = operations;
     }
 
+    public int getTotalProcessingTime() {
+        return totalProcessingTime;
+    }
+
+    public void setTotalProcessingTime(int totalProcessingTime) {
+        this.totalProcessingTime = totalProcessingTime;
+    }
+
     @Override
     public String toString() {
         return "Part{" +
@@ -58,6 +75,7 @@ public class Part {
                 ", name='" + name + '\'' +
                 ", quantity=" + quantity +
 //                ", operations=" + operations +
+                ", totalProcessingTime=" + totalProcessingTime +
                 '}';
     }
 }
