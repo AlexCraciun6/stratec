@@ -10,6 +10,7 @@ public class Operation {
         this.processingTime = processingTime;
         this.partId = partId;
     }
+    public Operation(){}
 
     // Getters and setters
     public Machine getMachine() {

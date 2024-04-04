@@ -45,7 +45,7 @@ public class OperationSchedule {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         return "OperationSchedule{" +
-                ", machineName=" + operation.getMachine().getName() +
+                "machineName=" + operation.getMachine().getName() +
                 ", startTime=" + startTime.format(formatter) +
                 ", endTime=" + endTime.format(formatter) +
                 '}';
