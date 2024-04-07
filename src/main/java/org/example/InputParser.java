@@ -61,7 +61,7 @@ public class InputParser {
                         String[] parts = line.split(":");
                         if (parts.length > 1) {
                             String cooldownTime = parts[1].trim().split(" ")[0];
-                            Integer cooldownValue = 0;
+                            int cooldownValue = 0;
                             if(!cooldownTime.equals("none"))
                                 cooldownValue = Integer.parseInt(cooldownTime);
                             machines.get(machinesIdx).setCooldownTime(cooldownValue);
@@ -71,7 +71,7 @@ public class InputParser {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
 
         return machines;
@@ -113,7 +113,7 @@ public class InputParser {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
 
         return parts;
@@ -160,7 +160,7 @@ public class InputParser {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
         }
 
         for(Part part: parts){
@@ -180,7 +180,7 @@ public class InputParser {
         return null;
     }
 
-    public void printToConsole(List<Machine> machines, List<Part> parts, List<Operation> operations){
+    public void printToConsole(List<Machine> machines, List<Part> parts){
         System.out.println("Machines:");
         for (Machine machine : machines) {
             System.out.println("Id: " + machine.getId() + ", Name: " + machine.getName() + ", Capacity: " + machine.getCapacity() + ", Cooldown Time: " + machine.getCooldownTime());
@@ -196,25 +196,6 @@ public class InputParser {
             for(Operation operation: part.getOperations())
                 System.out.println(operation);
         }
-    }
-
-    // Main method for testing
-    public static void main(String[] args) {
-        InputParser parser = new InputParser();
-        String filePath = "Input_One.txt";
-
-        List<Machine> machines = parser.parseMachines(filePath);
-        List<Part> parts = parser.parseParts(filePath);
-        List<Operation> operations = parser.parsePartOperations(filePath);
-
-        parser.printToConsole(machines, parts, operations);
-
-        SimpleSchedule schedule = SimpleScheduler.generateSchedule(machines, parts, operations);
-        for(PartSchedule partSchedule: schedule.getPartSchedules()){
-            System.out.println(partSchedule.getPart());
-            for(OperationSchedule operationSchedule: partSchedule.getOperationScheduleList())
-                System.out.println(operationSchedule);
-        }
-
+        System.out.println("\n");
     }
 }

@@ -15,5 +15,21 @@ public class Interval {
         return !startTime.isAfter(end) && !start.isAfter(endTime);
     }
 
+    public LocalTime getStart() {
+        return start;
+    }
+
+    public void setStart(LocalTime start) {
+        this.start = start;
+    }
+
+    public LocalTime getEnd() {
+        return end;
+    }
+
+    public void setEnd(LocalTime end) {
+        this.end = end;
+    }
+
     // Getters, setters, other methods
 }

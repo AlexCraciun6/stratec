@@ -1,11 +1,13 @@
 package org.example.models;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PartSchedule {
     private List<OperationSchedule> operationScheduleList;
     private final Part part;
+
 
     public PartSchedule(Part part) {
         this.operationScheduleList = new ArrayList<>();
@@ -26,6 +28,7 @@ public class PartSchedule {
     public Part getPart() {
         return part;
     }
+
 
     @Override
     public String toString() {

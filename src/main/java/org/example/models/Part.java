@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Part {
+public class Part implements Comparable<Part>{
     private static int idCache = 0;
     private final int id;
     private String name;
@@ -77,5 +77,11 @@ public class Part {
 //                ", operations=" + operations +
                 ", totalProcessingTime=" + totalProcessingTime +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Part otherPart) {
+        // Sort in descending order based on totalProcessingTime
+        return Integer.compare(otherPart.getTotalProcessingTime(), this.totalProcessingTime);
     }
 }
